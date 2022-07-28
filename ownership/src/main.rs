@@ -1,4 +1,14 @@
-fn print_string(s: String) {
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    return &s[..];
+}
+
+fn print_string(s: &String) {
     println!("string is {s}");
 }
 
@@ -49,7 +59,7 @@ fn main() {
 
     {
         let s = String::from("Hello");
-        print_string(s);
+        print_string(&s);
         // println!("s={s}"); // invalid.
     }
 
@@ -69,5 +79,10 @@ fn main() {
         let mut s1 = String::from("I'm higepon");
         concat_hello(&mut s1);
         println!("s1={s1}");
+    }
+    {
+        let s = String::from("I'm hige");
+        let word = first_word(&s);
+        println!("word={word}");
     }
 }
