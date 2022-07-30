@@ -20,10 +20,35 @@ enum IpAddr3 {
 
 enum Message {
     Quit,
-    Move {x: i32, y: i32},
+    Move { x: i32, y: i32 },
     Write(String),
-    ChangeColor(i32, i32, i32)
-};
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn call(&self) {
+        println!("called");
+    }
+}
+
+enum Option2<T> {
+    None,
+    Some(T),
+}
+
+#[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska,
+    // --snip--
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
 
 fn main() {
     let four = IpAddrKind::V4;
@@ -36,4 +61,22 @@ fn main() {
 
     let home = IpAddr3::V4(127, 0, 0, 1);
     let loopback = IpAddr3::V6(String::from(":1"));
+
+    let m = Message::Quit;
+    m.call();
+
+    let some_number = Some(5);
+    let some_string = Some("a string");
+    let absent_number: Option<i32> = None;
+
+    let coin = Coin::Quarter(UsState::Alabama);
+    let value: u32 = match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter(state) => {
+            println!("State = {:?}", state);
+            25
+        }
+    };
 }
