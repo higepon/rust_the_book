@@ -69,6 +69,6 @@ fn main() {
         };
         println!("rect={:?}", rect1);
         dbg!(&rect1);
-        println!("area={}", area3(rect1));
+        println!("area={:?}", area3(rect1));
     }
 }

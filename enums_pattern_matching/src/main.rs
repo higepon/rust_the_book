@@ -79,4 +79,17 @@ fn main() {
             25
         }
     };
+
+    let five = Some(5);
+
+    if let Some(val) = plus_one(five) {
+        println!("val = {:?}", val);
+    }
+}
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
+    }
 }
