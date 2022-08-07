@@ -1,5 +1,5 @@
 all: format
-	cargo run "arg1" ./poem.txt
+	cargo run "How" ./poem.txt
 
 format: 
 	rustfmt src/**/*.rs; rustfmt src/*.rs

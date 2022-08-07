@@ -43,7 +43,9 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 
 fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename).expect("file do not found");
-    println!("contetns={contents}");
+    for line in search(&config.query, &contents) {
+        println!("{}", line);
+    }
     Ok(())
 }
 
@@ -54,7 +56,7 @@ fn main() {
     }
     let config = Config::new(&args);
     if let Err(e) = run(config) {
-        println!("Application error {}", e);
+        eprintln!("Application error {}", e);
         process::exit(1);
     }
 }
